@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());  // Corrigi para usar a classe MyApp
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -12,13 +12,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(colorSchemeSeed: const Color(0xff6750a4)),
       home: Scaffold(
+
         // Início do AppBar
+
         appBar: AppBar(
           title: const Text('Login'),
         ), 
         // Fim do AppBar
         
         // Início do Body
+
         body: const Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
@@ -30,6 +33,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         // Fim do Body
+
       ),
     );
   }
@@ -55,18 +59,38 @@ class EmailTextField extends StatelessWidget {
 // Fim do EmailTextField
 
 // Início do PasswordTextField
-class PasswordTextField extends StatelessWidget {
+class PasswordTextField extends StatefulWidget {
   const PasswordTextField({super.key});
+
+  @override
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  bool _obscureText = true; // Inicia ocultando a senha
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText; // Alterna o estado da senha
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      obscureText: true, // Isso esconde a senha enquanto digita
-      decoration: const InputDecoration(
-        prefixIcon: Icon(Icons.lock),
+      obscureText: _obscureText,
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.lock),
         labelText: 'Senha',
         hintText: 'Digite sua senha',
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
+        // Ícone de "mostrar/ocultar"
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscureText ? Icons.visibility_off : Icons.visibility,
+          ),
+          onPressed: _togglePasswordVisibility,
+        ),
       ),
     );
   }
