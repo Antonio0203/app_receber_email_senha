@@ -1,43 +1,49 @@
 import 'package:flutter/material.dart';
+import 'second_page.dart'; // Importa a segunda página
 
 void main() {
   runApp(const MyApp());
 }
 
+// Início do MyApp
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(colorSchemeSeed: const Color(0xff6750a4)),
-      home: Scaffold(
+      home: const LoginPage(),
+    );
+  }
+}
+// Fim do MyApp
 
-        // Início do AppBar
+// Início da LoginPage
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
-        appBar: AppBar(
-          title: const Text('Login'),
-        ), 
-        // Fim do AppBar
-        
-        // Início do Body
-
-        body: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              EmailTextField(),
-              SizedBox(height: 16),
-              PasswordTextField(),
-            ],
-          ),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: const [
+            EmailTextField(),
+            SizedBox(height: 16),
+            PasswordTextField(),
+            SizedBox(height: 24),
+            EnterButton(),
+          ],
         ),
-        // Fim do Body
-
       ),
     );
   }
 }
+// Fim da LoginPage
 
 // Início do EmailTextField
 class EmailTextField extends StatelessWidget {
@@ -67,11 +73,11 @@ class PasswordTextField extends StatefulWidget {
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
-  bool _obscureText = true; // Inicia ocultando a senha
+  bool _obscureText = true;
 
   void _togglePasswordVisibility() {
     setState(() {
-      _obscureText = !_obscureText; // Alterna o estado da senha
+      _obscureText = !_obscureText;
     });
   }
 
@@ -84,7 +90,6 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         labelText: 'Senha',
         hintText: 'Digite sua senha',
         border: const OutlineInputBorder(),
-        // Ícone de "mostrar/ocultar"
         suffixIcon: IconButton(
           icon: Icon(
             _obscureText ? Icons.visibility_off : Icons.visibility,
@@ -96,3 +101,31 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   }
 }
 // Fim do PasswordTextField
+
+// Início do EnterButton
+class EnterButton extends StatelessWidget {
+  const EnterButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center( // Centraliza horizontalmente
+      child: SizedBox(
+        width: 200, // Define uma largura fixa para o botão (pode ajustar)
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue[900], // Azul escuro
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SecondPage()),
+            );
+          },
+          child: const Text('Entrar'),
+        ),
+      ),
+    );
+  }
+}
+
+// Fim do EnterButton
