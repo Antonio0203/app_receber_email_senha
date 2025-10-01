@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 
-/// Flutter code sample for Material Design 3 [TextField]s.
-
 void main() {
-  runApp(const TextFieldExamplesApp());
+  runApp(const MyApp());  // Corrigi para usar a classe MyApp
 }
 
-class TextFieldExamplesApp extends StatelessWidget {
-  const TextFieldExamplesApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(colorSchemeSeed: const Color(0xff6750a4)),
       home: Scaffold(
-        appBar: AppBar(title: const Text('Login')),  // Retirei o 'const' aqui
+        // Início do AppBar
+        appBar: AppBar(
+          title: const Text('Login'),
+        ), 
+        // Fim do AppBar
+        
+        // Início do Body
         body: const Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
@@ -25,11 +29,13 @@ class TextFieldExamplesApp extends StatelessWidget {
             ],
           ),
         ),
+        // Fim do Body
       ),
     );
   }
 }
 
+// Início do EmailTextField
 class EmailTextField extends StatelessWidget {
   const EmailTextField({super.key});
 
@@ -46,7 +52,9 @@ class EmailTextField extends StatelessWidget {
     );
   }
 }
+// Fim do EmailTextField
 
+// Início do PasswordTextField
 class PasswordTextField extends StatelessWidget {
   const PasswordTextField({super.key});
 
@@ -63,3 +71,4 @@ class PasswordTextField extends StatelessWidget {
     );
   }
 }
+// Fim do PasswordTextField
